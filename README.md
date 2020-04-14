@@ -28,7 +28,6 @@ By default, browser-do shuts down browser after tests. To keep browser window op
 
 Unit tests in watch mode is executed through standard `gulp.watch` with the help of [gulp-run](https://github.com/MrBoolean/gulp-run).
 
-
 ## Clear tracing cache
 
 In rare situation, you might need to run clear-cache after upgrading to new version of dumber bundler.
@@ -38,7 +37,6 @@ In rare situation, you might need to run clear-cache after upgrading to new vers
 ## index.html
 
 `index.html` is generated from `_index.html` every time `npm run build` runs. It is handled by dumber's `onManifest()` option, check `gulpfile.js` for details.
-
 
 ## Cypress e2e test
 
@@ -60,3 +58,22 @@ To run Cypress interactively, do
     npx cypress open
 
 For more information, visit https://www.cypress.io
+
+## LICENSE
+
+Copyright (C) 2020 Caleb Cushing <xenoterracide@gmail.com>
+
+> > >
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
