@@ -26,17 +26,11 @@ By default, browser-do shuts down browser after tests. To keep browser window op
 
     npm run build:test && browser-do -k --mocha --browser chrome < dist/entry-bundle.js
 
-Unit tests in watch mode is executed through standard `gulp.watch` with the help of [gulp-run](https://github.com/MrBoolean/gulp-run).
+Unit tests in watch mode is executed through stand webpack watch mode and the help of [webpack-shell-plugin-next](https://github.com/s00d/webpack-shell-plugin-next).
 
-## Clear tracing cache
+## Analyze webpack bundle
 
-In rare situation, you might need to run clear-cache after upgrading to new version of dumber bundler.
-
-    npm run clear-cache
-
-## index.html
-
-`index.html` is generated from `_index.html` every time `npm run build` runs. It is handled by dumber's `onManifest()` option, check `gulpfile.js` for details.
+    npm run analyze
 
 ## Cypress e2e test
 
@@ -72,8 +66,8 @@ Copyright (C) 2020 Caleb Cushing <xenoterracide@gmail.com>
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU Affero General Public License for more details.
 
     You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    along with this program. If not, see <https://www.gnu.org/licenses/>.

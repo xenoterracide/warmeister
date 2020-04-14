@@ -32,6 +32,5 @@ node_modules
 /dist
 /.nyc_output
 /coverage
-index.html
 /cypress/videos
 /cypress/screenshots
