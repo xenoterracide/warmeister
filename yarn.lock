@@ -43,6 +43,17 @@
     "@aurelia/runtime" "^0.7.0-dev.202004141952"
     "@aurelia/runtime-html" "^0.7.0-dev.202004141952"
 
+"@aurelia/i18n@^0.7.0-dev.202004141952":
+  version "0.7.0-dev.202004141952"
+  resolved "https://registry.yarnpkg.com/@aurelia/i18n/-/i18n-0.7.0-dev.202004141952.tgz#d5c6f8b97ea05c5964f6d92025ce9a8691c7f26d"
+  integrity sha512-gN17zG3gD8Iiu8rbmKqa2blV5IsvaVfXPeRdUZ+dUQJOx5jBkJa7aT2040Q5jJ+bDh/rYx4b6UtyI3lRaBs9KQ==
+  dependencies:
+    "@aurelia/jit" "^0.7.0-dev.202004141952"
+    "@aurelia/kernel" "^0.7.0-dev.202004141952"
+    "@aurelia/runtime" "^0.7.0-dev.202004141952"
+    "@aurelia/runtime-html" "^0.7.0-dev.202004141952"
+    i18next "^17.0.0"
+
 "@aurelia/jit-html-browser@^0.7.0-dev.202004141952":
   version "0.7.0-dev.202004141952"
   resolved "https://registry.yarnpkg.com/@aurelia/jit-html-browser/-/jit-html-browser-0.7.0-dev.202004141952.tgz#33bf4430629a2d944deca7d83c23122d76e3d92a"
@@ -287,6 +298,13 @@
   version "7.9.4"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.4.tgz#68a35e6b0319bbc014465be43828300113f2f2e8"
   integrity sha512-bC49otXX6N0/VYhgOMh4gnP26E9xnDZK3TmbNpxYzzz9BQLBosQwfyOe9/cXUU3txYhTzLCbcqd5c8y/OmCjHA==
+
+"@babel/runtime@^7.3.1":
+  version "7.9.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
+  integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
+  dependencies:
+    regenerator-runtime "^0.13.4"
 
 "@babel/template@^7.8.3":
   version "7.8.6"
@@ -4088,6 +4106,13 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+i18next@^17.0.0:
+  version "17.3.1"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-17.3.1.tgz#5fe75e054aae39a6f38f1a79f7ab49184c6dc7a1"
+  integrity sha512-4nY+yaENaoZKmpbiDXPzucVHCN3hN9Z9Zk7LyQXVOKVIpnYOJ3L/yxHJlBPtJDq3PGgjFwA0QBFm/26Z0iDT5A==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -6302,6 +6327,11 @@ readline2@^1.0.1:
     code-point-at "^1.0.0"
     is-fullwidth-code-point "^1.0.0"
     mute-stream "0.0.5"
+
+regenerator-runtime@^0.13.4:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha512-ZS5w8CpKFinUzOwW3c83oPeVXoNsrLsaCoLtJvAClH135j/R77RuymhiSErhm2lKcwSCIpmvIWSbDkIfAqKQlA==
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"

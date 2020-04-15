@@ -8,6 +8,7 @@
   },
   "license": "AGPL-3.0-or-later",
   "dependencies": {
+    "@aurelia/i18n": "^0.7.0-dev.202004141952",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "aurelia": "dev",
     "bulma": "^0.8.2"

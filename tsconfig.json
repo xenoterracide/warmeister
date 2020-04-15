@@ -7,10 +7,9 @@
     "skipLibCheck": true,
     "rootDir": "src",
     "target": "ES2017",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
+    "resolveJsonModule": true
   },
-  "include": [
-    "test",
-    "src"
-  ]
+  "include": ["test", "src"]
 }
