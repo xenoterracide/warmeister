@@ -1,5 +1,8 @@
 {
-    "licenser.license": "AGPLv3",
-    "licenser.projectName": "Warmeister",
-    "licenser.useSingleLineStyle": false
+  "licenser.license": "AGPLv3",
+  "licenser.projectName": "Warmeister",
+  "licenser.useSingleLineStyle": false,
+  "css.fileExtensions": ["scss"],
+  "files.autoSave": "onFocusChange",
+  "importSorter.generalConfiguration.sortImportsInDirectory": false
 }

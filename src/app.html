@@ -1,0 +1,47 @@
+<!--
+ Copyright (C) 2020 Caleb Cushing <xenoterracide@gmail.com>
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as
+ published by the Free Software Foundation, either version 3 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<import from="./index"></import>
+<import from="./about.html"></import>
+<import from="./missing"></import>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" goto="index">
+      <span class="icon is-medium">
+        <i class="fas fa-lg fa-home" aria-hidden="true"></i>
+      </span>
+    </a>
+    <a id="burger" role="button" click.delegate="burgerIsOpen = !burgerIsOpen"
+      class.bind="burgerIsOpen ? 'is-active' : ''" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="myNavBar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="myNavBar" class="navbar-menu" class.bind="burgerIsOpen ? 'is-active' : ''">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <a goto="about">My Games</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<au-viewport default="index" fallback="missing"></au-viewport>
