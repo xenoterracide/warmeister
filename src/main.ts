@@ -1,7 +1,7 @@
 import Aurelia, { LoggerConfiguration, LogLevel, RouterConfiguration } from 'aurelia';
 import { I18nConfiguration } from '@aurelia/i18n';
 import { App } from './app';
-import * as en from './locales/en/translations.json';
+import en from './locales/en/translations.json';
 
 Aurelia
   .register(RouterConfiguration.customize({
