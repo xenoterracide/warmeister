@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "licenser.license": "AGPLv3",
+    "licenser.projectName": "Warmeister",
+    "licenser.useSingleLineStyle": false,
+    "files.autoSave": "onFocusChange",
+    "importSorter.generalConfiguration.sortImportsInDirectory": false
+  }
+}

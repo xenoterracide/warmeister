@@ -10,11 +10,12 @@ Aurelia
   .register(LoggerConfiguration.create(console, LogLevel.debug))
   .register(
     I18nConfiguration.customize((options) => {
-      options.initOptions = {
-        resources: {
-          en: {translation: en},
-        }
-      };
+      options.translationAttributeAliases = ['i18n'],
+        options.initOptions = {
+          resources: {
+            en: {translation: en},
+          }
+        };
     })
   )
   // To use HTML5 pushState routes, replace previous line with the following

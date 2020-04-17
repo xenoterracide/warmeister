@@ -2,8 +2,8 @@
   "app": {
     "games": "My Games"
   },
-  "global": {
-    "w40k": "Warhammer 40k",
+  "game": {
+    "40k": "Warhammer 40k",
     "aos": "Age of Sigmar"
   }
 }
