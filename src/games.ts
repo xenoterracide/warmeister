@@ -46,9 +46,9 @@ export class Games {
         }).sort(sortGames(this.i18n));
     }
 
-    addToMyGames(game: GameButton) {
-        this.log.debug('adding game', game.i18n);
-        game.inMyGames = true;
+    toggleMyGames(game: GameButton) {
+        this.log.debug('toggling game', game.i18n);
+        game.inMyGames = !game.inMyGames;
         this.games = this.games.sort(sortGames(this.i18n));
     }
 
