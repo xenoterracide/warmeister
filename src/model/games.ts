@@ -1,26 +1,26 @@
 
 interface Identifiable {
-    readonly id: string;
+  readonly id: string;
 }
 
 export interface Game extends Identifiable {
-    readonly i18n: string;
+  readonly i18n: string;
 }
 
 export class GameRepository {
 
-    private readonly allGames: Array<Game> = [
-        {id: '40k', i18n: '40k'},
-        {id: 'aos', i18n: 'aos'},
-    ];
+  private readonly allGames: Game[] = [
+    {id: '40k', i18n: 'game.40k'},
+    {id: 'aos', i18n: 'game.aos'},
+  ];
 
-    private readonly myGames: Array<Game> = [];
+  private readonly myGames: Game[] = [];
 
-    findMyGames(): Array<Game> {
-        return this.myGames;
-    }
+  findMyGames(): Game[] {
+    return this.myGames;
+  }
 
-    findAllGames(): Array<Game> {
-        return this.allGames;
-    }
+  findAllGames(): Game[] {
+    return this.allGames;
+  }
 }

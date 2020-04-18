@@ -18,34 +18,37 @@
 import { ILogger } from 'aurelia';
 import _ from 'lodash';
 import { I18N } from '@aurelia/i18n';
-import { Translatable, translatableComparator } from './model/common';
+import { Enableable, Identifiable, Translatable, translatableComparator } from './model/common';
 import { Game, GameRepository } from './model/games';
 
-interface GameButton extends Translatable {
-    inMyGames: boolean;
-    readonly id: string;
+interface GameButton extends Translatable, Identifiable, Enableable {
 }
 
 export class Games {
-    private addIsActive: boolean = false;
-    private games: GameButton[];
-    private myGames: Game[];
-    constructor(private readonly repo: GameRepository, @I18N private readonly i18n: I18N, @ILogger private readonly log: ILogger) {
-        this.myGames = repo.findMyGames();
-        this.games = repo.findAllGames().map((game) => {
-            return {
-                id: game.id,
-                i18n: 'game.' + game.i18n,
-                inMyGames: this.myGames.some((g) => _.isEqual(g, game)),
-            };
-        }).sort(translatableComparator(this.i18n));
-    }
+  addIsActive: boolean = false;
+  games: GameButton[];
+  myGames: Game[];
+  constructor(private readonly repo: GameRepository, @I18N private readonly i18n: I18N, @ILogger private readonly log: ILogger) {
+    this.myGames = repo.findMyGames();
+    this.games = repo.findAllGames().map((game) => {
+      return {
+        ...game,
+        enabled: !this.myGames.some((g) => _.isEqual(g, game)),
+      };
+    }).sort(translatableComparator(this.i18n));
+  }
 
-    toggleMyGames(game: GameButton) {
-        this.log.debug('toggling game', game.i18n);
-        game.inMyGames = !game.inMyGames;
+  add(game: GameButton) {
+    this.log.debug('add', game.i18n);
+    game.enabled = !game.enabled;
+    this.myGames.push(game);
+    this.myGames.sort(translatableComparator(this.i18n));
+  }
 
-        this.games.sort(translatableComparator(this.i18n));
-    }
+  remove(index: number, game: GameButton) {
+    this.log.debug('remove', game.i18n);
+    game.enabled = true;
+    this.myGames.splice(index, 1);
+  }
 
 }

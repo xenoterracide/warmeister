@@ -17,12 +17,20 @@
 
 import { I18N } from '@aurelia/i18n';
 
+export interface Identifiable {
+  readonly id: string;
+}
+
+export interface Enableable {
+  enabled: boolean;
+}
+
 export interface Translatable {
-    readonly i18n: string;
+  readonly i18n: string;
 }
 
 export function translatableComparator(i18n: I18N): (a: Translatable, b: Translatable) => number {
-    return function (a: Translatable, b: Translatable): number {
-        return i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
-    };
+  return function (a: Translatable, b: Translatable): number {
+    return i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
+  };
 }

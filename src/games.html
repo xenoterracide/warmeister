@@ -16,7 +16,12 @@
 -->
 
 <div class="media-content">
-
+  <ul>
+    <li repeat.for="i of myGames.length" class="notification">
+      <button click.delegate="remove(i, myGames[i])" class="delete"></button>
+      <span i18n="${myGames[i].i18n}"></span>
+    </li>
+  </ul>
 </div>
 <div class.bind="addIsActive ? 'is-active' : ''" class="modal">
   <div class="modal-background"></div>
@@ -25,9 +30,8 @@
       <div class="content columns">
         <ul class="buttons level column">
           <li class="level-item" repeat.for="i of games.length">
-            <button class="button is-fullwidth" class.bind="games[i].inMyGames ? '' :'is-success'"
-              disabled.bind="games[i].inMyGames" i18n="${games[i].i18n}"
-              click.delegate="toggleMyGames(games[i])"></button>
+            <button class="button is-fullwidth" class.bind="games[i].enabled ? 'is-success' : ''"
+              disabled.bind="! games[i].enabled" i18n="${games[i].i18n}" click.delegate="add(games[i])"></button>
           </li>
         </ul>
       </div>
