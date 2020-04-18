@@ -17,6 +17,7 @@
 
 import { ILogger } from 'aurelia';
 import LinkHeader from 'http-link-header';
+import pkg from '../../package.json';
 import { Identifiable } from './common';
 
 export interface Game extends Identifiable {
@@ -39,15 +40,14 @@ export class GameRepository {
   }
 
   async findAll(): Promise<Game[]> {
-
-
+    const userAgent = `${pkg.name}/${pkg.version}`;
     const repos: GitHubRepo[] = [];
     let uri: string | undefined = 'https://api.github.com/users/BSData/repos';
     do {
       const fetched = await fetch(uri, {
         method: 'GET',
         headers: {
-          'User-Agent': 'WarMeister'
+          'User-Agent': userAgent
         }
       });
       repos.push(... await fetched.json());

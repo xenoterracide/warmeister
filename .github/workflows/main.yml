@@ -1,0 +1,94 @@
+name: continuous integration
+on: [push]
+jobs:
+  unit:
+    needs: [e2e]
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - run: npm rebuild node-sass
+        if: steps.yarn-cache.outputs.cache-hit == 'true'
+      - run: yarn test
+  e2e:
+    needs: [build]
+    strategy:
+      matrix:
+        browser: [chrome, electron, firefox]
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - run: npm rebuild node-sass
+        if: steps.yarn-cache.outputs.cache-hit == 'true'
+      - name: test
+        uses: cypress-io/github-action@v1
+        with:
+          config-file: test/e2e/cypress-config.json
+          start: yarn start
+          browser: ${{matrix.browser}}
+          record: true
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  build:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - run: npm rebuild node-sass
+        if: steps.yarn-cache.outputs.cache-hit == 'true'
+      - run: yarn build
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: [build, unit, e2e]
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: |
+          SERVER_ENV=$(echo $GITHUB_REF | cut -f1,2 -d"/" --complement)
+          curl --silent --trace-ascii --fail -XPOST "https://api.github.com/repos/$GITHUB_REPOSITORY/deployments" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.ant-man-preview+json" \
+            --data "{ \"ref\": \"$GITHUB_REF\",\"environment\":\"$SERVER_ENV\", \"auto-merge\":\"false\", \"required_contexts\":[]}"
