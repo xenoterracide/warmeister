@@ -18,7 +18,7 @@
 <div class="media-content">
   <ul>
     <li repeat.for="i of myGames.length" class="notification">
-      <button click.delegate="remove(i, myGames[i])" class="delete"></button>
+      <button click.delegate="remove(myGames[i])" class="delete"></button>
       <span i18n="${myGames[i].i18n}"></span>
     </li>
   </ul>

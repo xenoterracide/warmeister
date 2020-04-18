@@ -45,10 +45,10 @@ export class Games {
     this.myGames.sort(translatableComparator(this.i18n));
   }
 
-  remove(index: number, game: GameButton) {
+  remove(game: GameButton) {
     this.log.debug('remove', game.i18n);
     game.enabled = true;
-    this.myGames.splice(index, 1);
+    this.myGames.splice(this.myGames.findIndex((g) => _.isEqual(g, game)), 1);
   }
 
 }
