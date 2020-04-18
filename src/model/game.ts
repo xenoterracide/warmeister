@@ -18,15 +18,14 @@
 import { ILogger } from 'aurelia';
 import LinkHeader from 'http-link-header';
 import pkg from '../../package.json';
-import { Identifiable } from './common';
+import { Identifiable, Translatable } from './common';
 
-export interface Game extends Identifiable {
-  display: string;
+export interface Game extends Identifiable, Translatable {
+
 }
 
 interface GitHubRepo {
   readonly name: string;
-  readonly description: string;
 }
 
 export class GameRepository {
@@ -71,10 +70,9 @@ export class GameRepository {
       'status',
     ];
     return repos.map(r => {
-      this.log.debug('repo', r.name);
       return {
         id: r.name,
-        display: r.description,
+        i18n: `game.${r.name}`,
       };
     }).filter((g) => !blacklist.includes(g.id));
   }

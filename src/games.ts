@@ -17,29 +17,27 @@
 
 import { ILogger } from 'aurelia';
 import _ from 'lodash';
+import { I18N } from '@aurelia/i18n';
 import { IRouteableComponent } from '@aurelia/router';
-import { Enableable } from './model/common';
+import { Comparator, Enableable } from './model/common';
 import { Game, GameRepository } from './model/game';
 
 interface GameButton extends Game, Enableable {
 }
 
-function gameComparator(): (a: Game, b: Game) => number {
-  return (a, b) => a.display.localeCompare(b.display);
-}
 export class Games implements IRouteableComponent {
   addIsActive: boolean = false;
   games: GameButton[] = [];
   myGames: Game[] = [];
-  constructor(private readonly repo: GameRepository, @ILogger private readonly log: ILogger) {
+  constructor(private readonly repo: GameRepository, @ILogger private readonly log: ILogger, @I18N private readonly i18n: I18N) {
   }
 
   add(game: GameButton) {
     this.log.debug('add', game.id);
     game.enabled = false;
     this.myGames.push(game);
+    this.myGames.sort(Comparator.translatable(this.i18n));
     this.log.debug('mygames', this.myGames);
-    this.myGames.sort(gameComparator());
   }
 
   remove(game: GameButton) {
@@ -47,17 +45,15 @@ export class Games implements IRouteableComponent {
     game.enabled = true;
     this.myGames.splice(this.myGames.findIndex((g) => _.isEqual(g, game)), 1);
   }
-
   async enter(): Promise<void> {
     this.myGames = this.repo.findMyGames();
     const games = await this.repo.findAll();
-    this.log.debug('games', games);
     this.games = games.map((game) => {
       return {
         ...game,
         enabled: !this.myGames.some((g) => _.isEqual(g, game)),
       };
-    }).sort(gameComparator());
+    }).sort(Comparator.translatable(this.i18n));
   }
 
 }

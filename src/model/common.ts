@@ -29,8 +29,12 @@ export interface Translatable {
   readonly i18n: string;
 }
 
-export function translatableComparator(i18n: I18N): (a: Translatable, b: Translatable) => number {
+function translatableComparator(i18n: I18N): (a: Translatable, b: Translatable) => number {
   return function (a: Translatable, b: Translatable): number {
     return i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
   };
 }
+
+export const Comparator = {
+  translatable(i18n: I18N) {return translatableComparator(i18n);}
+};
