@@ -15,20 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$section-padding: 1.5rem 1.5rem;
+import { I18N } from '@aurelia/i18n';
 
-@import "~bulma";
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+export interface Translatable {
+    readonly i18n: string;
+}
 
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-@import "~@fortawesome/fontawesome-free/scss/regular.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-
-.is-fab {
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  :hover {
-    color: bulmaDarken($primary, 2.5%);
-  }
+export function translatableComparator(i18n: I18N): (a: Translatable, b: Translatable) => number {
+    return function (a: Translatable, b: Translatable): number {
+        return i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
+    };
 }

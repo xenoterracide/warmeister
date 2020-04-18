@@ -18,21 +18,16 @@
 import { ILogger } from 'aurelia';
 import _ from 'lodash';
 import { I18N } from '@aurelia/i18n';
+import { Translatable, translatableComparator } from './model/common';
 import { Game, GameRepository } from './model/games';
 
-interface GameButton {
-    readonly i18n: string;
+interface GameButton extends Translatable {
     inMyGames: boolean;
     readonly id: string;
 }
 
-function sortGames(i18n: I18N): (a: GameButton, b: GameButton) => number {
-    return function (a: GameButton, b: GameButton): number {
-        return (a.inMyGames == b.inMyGames ? 0 : -1) || i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
-    };
-}
-
 export class Games {
+    private addIsActive: boolean = false;
     private games: GameButton[];
     private myGames: Game[];
     constructor(private readonly repo: GameRepository, @I18N private readonly i18n: I18N, @ILogger private readonly log: ILogger) {
@@ -43,13 +38,14 @@ export class Games {
                 i18n: 'game.' + game.i18n,
                 inMyGames: this.myGames.some((g) => _.isEqual(g, game)),
             };
-        }).sort(sortGames(this.i18n));
+        }).sort(translatableComparator(this.i18n));
     }
 
     toggleMyGames(game: GameButton) {
         this.log.debug('toggling game', game.i18n);
         game.inMyGames = !game.inMyGames;
-        this.games = this.games.sort(sortGames(this.i18n));
+
+        this.games.sort(translatableComparator(this.i18n));
     }
 
 }

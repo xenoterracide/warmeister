@@ -14,12 +14,12 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <import from="./index"></import>
 <import from="./games"></import>
 <import from="./about.html"></import>
 <import from="./missing"></import>
 
+<title portal="head">WarMeister</title>
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" goto="index">
@@ -27,21 +27,7 @@
         <i class="fas fa-lg fa-home" aria-hidden="true"></i>
       </span>
     </a>
-    <a id="burger" role="button" click.delegate="burgerIsOpen = !burgerIsOpen"
-      class.bind="burgerIsOpen ? 'is-active' : ''" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-      data-target="myNavBar">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="myNavBar" class="navbar-menu" class.bind="burgerIsOpen ? 'is-active' : ''">
-    <div class="navbar-start">
-      <div class="navbar-item">
-        <a goto="games" click.delegate="burgerIsOpen = !burgerIsOpen" i18n="app.games"></a>
-      </div>
-    </div>
+    <a goto="games" class="navbar-item" i18n="app.games"></a>
   </div>
 </nav>
 
