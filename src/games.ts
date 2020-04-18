@@ -38,6 +38,7 @@ export class Games implements IRouteableComponent {
     this.log.debug('add', game.id);
     game.enabled = false;
     this.myGames.push(game);
+    this.log.debug('mygames', this.myGames);
     this.myGames.sort(gameComparator());
   }
 
@@ -49,7 +50,9 @@ export class Games implements IRouteableComponent {
 
   async enter(): Promise<void> {
     this.myGames = this.repo.findMyGames();
-    this.games = (await this.repo.findAll()).map((game) => {
+    const games = await this.repo.findAll();
+    this.log.debug('games', games);
+    this.games = games.map((game) => {
       return {
         ...game,
         enabled: !this.myGames.some((g) => _.isEqual(g, game)),

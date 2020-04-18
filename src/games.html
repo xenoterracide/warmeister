@@ -19,7 +19,7 @@
   <ul>
     <li repeat.for="i of myGames.length" class="notification">
       <button click.delegate="remove(myGames[i])" class="delete"></button>
-      <span>${games[i].display}</span>
+      <span id="${games[i].id}">${games[i].display}</span>
     </li>
   </ul>
 </div>
@@ -30,7 +30,7 @@
       <div class="content columns">
         <ul class="buttons level column">
           <li class="level-item" repeat.for="i of games.length">
-            <button id="${games[i].id}" class="button is-fullwidth trim-text"
+            <button id="${games[i].id}" class="button is-fullwidth is-light"
               class.bind="games[i].enabled ? 'is-success' : ''" disabled.bind="! games[i].enabled"
               click.delegate="add(games[i])">${games[i].display}</button>
           </li>

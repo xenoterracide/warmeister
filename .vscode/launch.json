@@ -5,22 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
-      "request": "attach",
-      "name": "Attach to Chrome",
-      "port": 9222,
-      "webRoot": "${workspaceFolder}/src"
-    },
-    {
       "name": "Chrome Debugger",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:9000",
-      "webRoot": "${workspaceRoot}/src",
-      "userDataDir": "${workspaceRoot}/.chrome",
-      "sourceMapPathOverrides": {
-        "../src/*": "${webRoot}/*"
-      }
+      "webRoot": "${workspaceRoot}",
+      "userDataDir": "${workspaceRoot}/.chrome"
     }
   ]
 }
