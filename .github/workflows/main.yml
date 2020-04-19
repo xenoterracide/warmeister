@@ -89,7 +89,7 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           config-file: cypress.json
-          start: yarn start:production
+          start: yarn start:e2e
           browser: ${{matrix.browser}}
           record: true
         env:

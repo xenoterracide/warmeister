@@ -65,6 +65,7 @@
     "pretest": "npm run lint && npm run build:test",
     "start": "webpack-dev-server",
     "start:production": "ws",
+    "start:e2e": "ws --config-file lws.e2e.config.js",
     "start:electron": "npx cap copy && npx cap open electron",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
