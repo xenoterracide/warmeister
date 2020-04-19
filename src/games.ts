@@ -35,7 +35,7 @@ export class Games implements IRouteableComponent {
     @I18N private readonly i18n: I18N
   ) {}
 
-  add(game: GameButton) {
+  add(game: GameButton): void {
     this.log.debug('add', game.id);
     game.enabled = false;
     this.myGames.push(game);
@@ -43,7 +43,7 @@ export class Games implements IRouteableComponent {
     this.log.debug('mygames', this.myGames);
   }
 
-  remove(game: GameButton) {
+  remove(game: GameButton): void {
     this.log.debug('remove', game.id);
     game.enabled = true;
     this.myGames.splice(

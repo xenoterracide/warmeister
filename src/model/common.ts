@@ -38,7 +38,7 @@ function translatableComparator(
 }
 
 export const Comparator = {
-  translatable(i18n: I18N) {
+  translatable(i18n: I18N): (a: Translatable, b: Translatable) => number {
     return translatableComparator(i18n);
   },
 };
