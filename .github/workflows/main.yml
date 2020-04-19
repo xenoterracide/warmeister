@@ -19,6 +19,11 @@ jobs:
       - run: npm rebuild node-sass
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - run: yarn build
+      - run: tar -cJf dist.tar.xz dist
+      - uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist.tar.xz
   lint:
     timeout-minutes: 5
     runs-on: ubuntu-latest
