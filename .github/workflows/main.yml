@@ -64,8 +64,6 @@ jobs:
         with:
           node-version: 12
       - run: yarn install
-      - run: npm rebuild node-sass
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
       - name: test
         uses: cypress-io/github-action@v1
         with:
