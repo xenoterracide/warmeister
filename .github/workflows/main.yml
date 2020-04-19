@@ -75,10 +75,14 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-      - run: yarn install
+      - uses: actions/cache@v1
+        id: cypress-cache
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-cypress-
+      - run: yarn install --check-files
       - run: npm rebuild node-sass
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
-      - run: yarn add --dev cypress --force
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - name: test
         uses: cypress-io/github-action@v1
