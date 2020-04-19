@@ -67,20 +67,9 @@
     "analyze": "rimraf dist && webpack --env production --analyze",
     "build:test": "rimraf dist && webpack --env test",
     "test:watch": "rimraf dist && webpack --env test --watch --runTest",
-    "lint:js": "tslint --project tsconfig.json",
+    "lint:js": "eslint --ext .ts .",
     "test:headless": "browser-do --mocha < dist/entry-bundle.js",
     "test:chrome": "browser-do --mocha --browser chrome < dist/entry-bundle.js",
     "test:e2e": "cypress run"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }
