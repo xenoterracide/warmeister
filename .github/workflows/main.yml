@@ -15,12 +15,6 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-      - uses: actions/cache@v1
-        id: cypress-cache
-        with:
-          path: ~/.cypress/cache
-          key: ${{ runner.os }}-cypress-${{ hashFiles('~/.cypress/cache') }}
-          restore-keys: ${{ runner.os }}-cypress-
       - run: yarn install
       - run: yarn lint
   unit:
@@ -38,12 +32,6 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-      - uses: actions/cache@v1
-        id: cypress-cache
-        with:
-          path: ~/.cypress/cache
-          key: ${{ runner.os }}-cypress-${{ hashFiles('~/.cypress/cache') }}
-          restore-keys: ${{ runner.os }}-cypress-
       - run: yarn install
       - run: npm rebuild node-sass
         if: steps.yarn-cache.outputs.cache-hit == 'true'
@@ -88,12 +76,6 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-      - uses: actions/cache@v1
-        id: cypress-cache
-        with:
-          path: ~/.cypress/cache
-          key: ${{ runner.os }}-cypress-${{ hashFiles('~/.cypress/cache') }}
-          restore-keys: ${{ runner.os }}-cypress-
       - run: yarn install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
       - run: npm rebuild node-sass
