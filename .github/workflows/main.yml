@@ -19,28 +19,12 @@ jobs:
       - run: npm rebuild node-sass
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - run: yarn build
+      - run: tar -cJf dist.tar.xz dist
       - uses: actions/upload-artifact@v1
         with:
-          name: dist
-          path: dist
-  lint:
-    timeout-minutes: 5
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
-      - run: yarn install
-      - run: yarn lint
+          name: dist.tar.xz
+          path: dist.tar.xz
   unit:
-    needs: [e2e, lint]
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +43,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - run: yarn test
   e2e:
-    needs: [build, lint]
+    needs: [build]
     strategy:
       matrix:
         browser: [chrome, electron, firefox]
@@ -88,7 +72,10 @@ jobs:
       - run: yarn install
       - run: npm rebuild node-sass cypress
         if: steps.yarn-cache.outputs.cache-hit == 'true'
-      - run: yarn build
+      - uses: actions/download-artifact@v1
+        with:
+          name: dist.tar.xz
+      - run: tar -xvf dist.tar.xz
       - name: test
         uses: cypress-io/github-action@v1
         with:
