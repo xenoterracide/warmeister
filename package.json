@@ -64,6 +64,7 @@
     "test": "npm run test:headless",
     "pretest": "npm run lint && npm run build:test",
     "start": "webpack-dev-server",
+    "start:production": "ws",
     "build": "rimraf dist && webpack --env production",
     "analyze": "rimraf dist && webpack --env production --analyze",
     "build:test": "rimraf dist && webpack --env test",
