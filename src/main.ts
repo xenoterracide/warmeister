@@ -1,12 +1,8 @@
-import Aurelia, {
-  LoggerConfiguration,
-  LogLevel,
-  RouterConfiguration,
-} from "aurelia";
-import { I18nConfiguration } from "@aurelia/i18n";
-import { HookTypes, ViewportInstruction } from "@aurelia/router";
-import { App } from "./app";
-import en from "./locales/en/translations.json";
+import Aurelia, { LoggerConfiguration, LogLevel, RouterConfiguration } from 'aurelia';
+import { I18nConfiguration } from '@aurelia/i18n';
+import { HookTypes, ViewportInstruction } from '@aurelia/router';
+import { App } from './app';
+import en from './locales/en/translations.json';
 
 Aurelia.register(LoggerConfiguration.create(console, LogLevel.debug))
   .register(
@@ -14,7 +10,9 @@ Aurelia.register(LoggerConfiguration.create(console, LogLevel.debug))
       useUrlFragmentHash: false,
       hooks: [
         {
-          hook: async (instrs: ViewportInstruction[]) => {
+          hook: async (
+            instrs: ViewportInstruction[]
+          ): Promise<ViewportInstruction[]> => {
             if (!Array.isArray(instrs) || instrs.length < 1) {
               return instrs;
             }
@@ -24,14 +22,14 @@ Aurelia.register(LoggerConfiguration.create(console, LogLevel.debug))
               const title = (comp.componentType as any).title;
               if (title) {
                 titles.push(
-                  typeof title !== "string"
+                  typeof title !== 'string'
                     ? title(comp.componentInstance)
                     : title
                 );
               }
               [comp] = (comp.nextScopeInstructions ?? []).slice(-1);
             } while (comp);
-            const title = titles.length > 0 ? titles.join(" > ") + " | " : "";
+            const title = titles.length > 0 ? titles.join(' > ') + ' | ' : '';
             document.title = `${title}WarMeister`;
             return instrs;
           },
@@ -44,7 +42,7 @@ Aurelia.register(LoggerConfiguration.create(console, LogLevel.debug))
   )
   .register(
     I18nConfiguration.customize((options) => {
-      (options.translationAttributeAliases = ["i18n"]),
+      (options.translationAttributeAliases = ['i18n']),
         (options.initOptions = {
           resources: {
             en: { translation: en },
