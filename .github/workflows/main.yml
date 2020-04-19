@@ -88,7 +88,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
   deploy:
     if: github.ref == 'refs/heads/master'
-    needs: [build, lint, unit, e2e]
+    needs: [build, unit, e2e]
     timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
