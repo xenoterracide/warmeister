@@ -17,5 +17,5 @@
 
 export class App {
   burgerIsOpen = false;
-  title = "WarMeister";
+  title = 'WarMeister';
 }

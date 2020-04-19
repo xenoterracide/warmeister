@@ -9,6 +9,8 @@
     "licenser.projectName": "Warmeister",
     "licenser.useSingleLineStyle": false,
     "files.autoSave": "onFocusChange",
-    "importSorter.generalConfiguration.sortImportsInDirectory": false
+    "importSorter.generalConfiguration.sortImportsInDirectory": false,
+    "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 80,
+    "importSorter.importStringConfiguration.tabSize": 2
   }
 }
