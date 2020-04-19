@@ -73,7 +73,7 @@ jobs:
       - name: test
         uses: cypress-io/github-action@v1
         with:
-          config-file: test/e2e/cypress-config.json
+          config-file: cypress.json
           start: yarn start
           browser: ${{matrix.browser}}
           record: true
