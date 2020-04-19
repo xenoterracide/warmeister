@@ -81,14 +81,15 @@ jobs:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-cypress-
-      - run: yarn install --check-files
-      - run: npm rebuild node-sass
+      - run: yarn install
+      - run: npm rebuild node-sass cypress
         if: steps.yarn-cache.outputs.cache-hit == 'true'
+      - run: yarn build
       - name: test
         uses: cypress-io/github-action@v1
         with:
           config-file: cypress.json
-          start: yarn start
+          start: yarn start:production
           browser: ${{matrix.browser}}
           record: true
         env:

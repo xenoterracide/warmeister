@@ -16,9 +16,9 @@
  */
 
 module.exports = {
-  spa: "index.html",
-  directory: "dist",
+  spa: 'index.html',
+  directory: 'dist',
   log: {
-    format: "dev",
+    format: 'dev',
   },
 };
