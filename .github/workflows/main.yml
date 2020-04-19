@@ -19,11 +19,10 @@ jobs:
       - run: npm rebuild node-sass
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - run: yarn build
-      - run: tar -cJf dist.tar.xz dist
       - uses: actions/upload-artifact@v1
         with:
-          name: dist.tar.xz
-          path: dist.tar.xz
+          name: dist
+          path: dist
   unit:
     timeout-minutes: 5
     runs-on: ubuntu-latest
@@ -74,8 +73,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - uses: actions/download-artifact@v1
         with:
-          name: dist.tar.xz
-      - run: tar -xvf dist.tar.xz
+          name: dist
       - name: test
         uses: cypress-io/github-action@v1
         with:
