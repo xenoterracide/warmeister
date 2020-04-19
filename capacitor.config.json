@@ -1,0 +1,8 @@
+{
+  "appId": "com.warmeister",
+  "appName": "warmeister",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "cordova": {}
+}

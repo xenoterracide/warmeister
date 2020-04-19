@@ -4,11 +4,11 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "rootDir": "src",
     "target": "ES2017",
     "esModuleInterop": true,
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "rootDirs": ["src", "test"]
   },
   "include": ["test", "src"],
   "files": ["./package.json"]

@@ -9,6 +9,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@aurelia/i18n": "^0.7.0-dev.202004141952",
+    "@capacitor/core": "^2.0.1",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "aurelia": "^0.7.0-dev.202004141952",
     "bulma": "^0.8.2",
@@ -19,29 +20,34 @@
   "devDependencies": {
     "@aurelia/testing": "dev",
     "@aurelia/webpack-loader": "dev",
+    "@capacitor/cli": "^2.0.1",
     "@types/format-util": "^1.0.1",
     "@types/http-link-header": "^1.0.1",
     "@types/mocha": "^7.0.0",
     "@types/node": "^13.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
     "autoprefixer": "^9.0.0",
     "babel-eslint": "^10.0.0",
     "browser-do": "^2.0.0",
     "chai": "^4.0.0",
     "css-loader": "^3.0.0",
     "cypress": "^4.0.0",
-    "eslint": "^6.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^3.0.0",
     "htmlhint": "^0.11.0",
     "mocha": "^7.0.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.4",
     "rimraf": "^3.0.0",
     "sass": "^1.0.0",
     "sass-lint": "^1.0.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.0.0",
-    "tslint": "^6.0.0",
     "typescript": "^3.0.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.0.0",
@@ -65,5 +71,16 @@
     "test:headless": "browser-do --mocha < dist/entry-bundle.js",
     "test:chrome": "browser-do --mocha --browser chrome < dist/entry-bundle.js",
     "test:e2e": "cypress run"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

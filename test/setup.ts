@@ -1,14 +1,6 @@
-import {
-  HTMLTestContext,
-  TestContext,
-} from '@aurelia/testing';
-import {
-  JitHtmlBrowserConfiguration
-} from '@aurelia/jit-html-browser';
-import {
-  Reporter,
-  LogLevel,
-} from '@aurelia/kernel';
+import { HTMLTestContext, TestContext } from "@aurelia/testing";
+import { JitHtmlBrowserConfiguration } from "@aurelia/jit-html-browser";
+import { Reporter, LogLevel } from "@aurelia/kernel";
 
 Reporter.level = LogLevel.error;
 
@@ -34,7 +26,7 @@ function createBrowserTestContext(): HTMLTestContext {
 function initializeBrowserTestContext(): void {
   TestContext.createHTMLTestContext = createBrowserTestContext;
   // Just trigger the HTMLDOM to be resolved once so it sets the DOM globals
-  TestContext.createHTMLTestContext().dom.createElement('div');
+  TestContext.createHTMLTestContext().dom.createElement("div");
 }
 
 initializeBrowserTestContext();

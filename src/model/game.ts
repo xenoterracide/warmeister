@@ -15,24 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ILogger } from 'aurelia';
-import LinkHeader from 'http-link-header';
-import pkg from '../../package.json';
-import { Identifiable, Translatable } from './common';
+import { ILogger } from "aurelia";
+import LinkHeader from "http-link-header";
+import pkg from "../../package.json";
+import { Identifiable, Translatable } from "./common";
 
-export interface Game extends Identifiable, Translatable {
-
-}
+export interface Game extends Identifiable, Translatable {}
 
 interface GitHubRepo {
   readonly name: string;
 }
 
 export class GameRepository {
-
   private readonly myGames: Game[] = [];
-  constructor(@ILogger private readonly log: ILogger) {
-  }
+  constructor(@ILogger private readonly log: ILogger) {}
 
   findMyGames(): Game[] {
     return this.myGames;
@@ -41,39 +37,43 @@ export class GameRepository {
   async findAll(): Promise<Game[]> {
     const userAgent = `${pkg.name}/${pkg.version}`;
     const repos: GitHubRepo[] = [];
-    let uri: string | undefined = 'https://api.github.com/users/BSData/repos';
+    let uri: string | undefined = "https://api.github.com/users/BSData/repos";
     do {
       const fetched = await fetch(uri, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'User-Agent': userAgent
-        }
+          "User-Agent": userAgent,
+        },
+        cache: "force-cache",
       });
-      repos.push(... await fetched.json());
-      const link = fetched.headers.get('Link') ?? undefined;
+      for (const [k, v] of fetched.headers.entries()) {
+        this.log.debug("header", k, v);
+      }
+      repos.push(...(await fetched.json()));
+      const link = fetched.headers.get("Link") ?? undefined;
       if (link) {
         const parsed = LinkHeader.parse(link);
-        uri = parsed.rel('next')[0]?.uri;
-      }
-      else {
+        uri = parsed.rel("next")[0]?.uri;
+      } else {
         uri = undefined;
       }
-    }
-    while (!!uri);
+    } while (!!uri);
 
     const blacklist: string[] = [
-      'bsdata',
-      'catalogue-development',
-      'check-datafiles',
-      'publish-catpkg',
-      'schemas',
-      'status',
+      "bsdata",
+      "catalogue-development",
+      "check-datafiles",
+      "publish-catpkg",
+      "schemas",
+      "status",
     ];
-    return repos.map(r => {
-      return {
-        id: r.name,
-        i18n: `game.${r.name}`,
-      };
-    }).filter((g) => !blacklist.includes(g.id));
+    return repos
+      .map((r) => {
+        return {
+          id: r.name,
+          i18n: `game.${r.name}`,
+        };
+      })
+      .filter((g) => !blacklist.includes(g.id));
   }
 }

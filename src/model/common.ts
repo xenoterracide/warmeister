@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { I18N } from '@aurelia/i18n';
+import { I18N } from "@aurelia/i18n";
 
 export interface Identifiable {
   readonly id: string;
@@ -29,12 +29,16 @@ export interface Translatable {
   readonly i18n: string;
 }
 
-function translatableComparator(i18n: I18N): (a: Translatable, b: Translatable) => number {
+function translatableComparator(
+  i18n: I18N
+): (a: Translatable, b: Translatable) => number {
   return function (a: Translatable, b: Translatable): number {
     return i18n.tr(a.i18n).localeCompare(i18n.tr(b.i18n));
   };
 }
 
 export const Comparator = {
-  translatable(i18n: I18N) {return translatableComparator(i18n);}
+  translatable(i18n: I18N) {
+    return translatableComparator(i18n);
+  },
 };

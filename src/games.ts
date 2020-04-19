@@ -15,45 +15,52 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ILogger } from 'aurelia';
-import _ from 'lodash';
-import { I18N } from '@aurelia/i18n';
-import { IRouteableComponent } from '@aurelia/router';
-import { Comparator, Enableable } from './model/common';
-import { Game, GameRepository } from './model/game';
+import { ILogger } from "aurelia";
+import _ from "lodash";
+import { I18N } from "@aurelia/i18n";
+import { IRouteableComponent } from "@aurelia/router";
+import { Comparator, Enableable } from "./model/common";
+import { Game, GameRepository } from "./model/game";
 
-interface GameButton extends Game, Enableable {
-}
+interface GameButton extends Game, Enableable {}
 
 export class Games implements IRouteableComponent {
-  addIsActive: boolean = false;
+  title = "Games";
+  addIsActive = false;
   games: GameButton[] = [];
   myGames: Game[] = [];
-  constructor(private readonly repo: GameRepository, @ILogger private readonly log: ILogger, @I18N private readonly i18n: I18N) {
-  }
+  constructor(
+    private readonly repo: GameRepository,
+    @ILogger private readonly log: ILogger,
+    @I18N private readonly i18n: I18N
+  ) {}
 
   add(game: GameButton) {
-    this.log.debug('add', game.id);
+    this.log.debug("add", game.id);
     game.enabled = false;
     this.myGames.push(game);
     this.myGames.sort(Comparator.translatable(this.i18n));
-    this.log.debug('mygames', this.myGames);
+    this.log.debug("mygames", this.myGames);
   }
 
   remove(game: GameButton) {
-    this.log.debug('remove', game.id);
+    this.log.debug("remove", game.id);
     game.enabled = true;
-    this.myGames.splice(this.myGames.findIndex((g) => _.isEqual(g, game)), 1);
+    this.myGames.splice(
+      this.myGames.findIndex((g) => _.isEqual(g, game)),
+      1
+    );
   }
   async enter(): Promise<void> {
     this.myGames = this.repo.findMyGames();
     const games = await this.repo.findAll();
-    this.games = games.map((game) => {
-      return {
-        ...game,
-        enabled: !this.myGames.some((g) => _.isEqual(g, game)),
-      };
-    }).sort(Comparator.translatable(this.i18n));
+    this.games = games
+      .map((game) => {
+        return {
+          ...game,
+          enabled: !this.myGames.some((g) => _.isEqual(g, game)),
+        };
+      })
+      .sort(Comparator.translatable(this.i18n));
   }
-
 }
