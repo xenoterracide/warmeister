@@ -1,41 +1,42 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const WebpackShellPluginNext = require("webpack-shell-plugin-next");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
-const cssLoader = "css-loader";
+const cssLoader = 'css-loader';
 const sassLoader = {
-  loader: "sass-loader",
+  loader: 'sass-loader',
   options: {
     sassOptions: {
-      includePaths: ["node_modules"],
+      includePaths: ['node_modules'],
     },
   },
 };
 
 const postcssLoader = {
-  loader: "postcss-loader",
+  loader: 'postcss-loader',
   options: {
-    plugins: () => [require("autoprefixer")()],
+    plugins: () => [require('autoprefixer')()],
   },
 };
 
 module.exports = function (env, { runTest, analyze }) {
   const production =
-    env === "production" || process.env.NODE_ENV === "production";
-  const test = env === "test" || process.env.NODE_ENV === "test";
+    env === 'production' || process.env.NODE_ENV === 'production';
+  const test = env === 'test' || process.env.NODE_ENV === 'test';
   return {
-    mode: production ? "production" : "development",
-    devtool: production ? "source-maps" : "inline-source-map",
-    entry: test ? "./test/all-spec.js" : "./src/main.ts",
+    mode: production ? 'production' : 'development',
+    devtool: production ? 'source-maps' : 'inline-source-map',
+    entry: test ? './test/all-spec.js' : './src/main.ts',
     output: {
-      path: path.resolve(__dirname, "dist"),
-      filename: "entry-bundle.js",
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'entry-bundle.js',
     },
     resolve: {
-      extensions: [".ts", ".js"],
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
+      extensions: ['.ts', '.js'],
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
     devServer: {
       historyApiFallback: true,
@@ -47,42 +48,42 @@ module.exports = function (env, { runTest, analyze }) {
       rules: [
         {
           test: /\.scss$/i,
-          use: ["style-loader", cssLoader, postcssLoader, sassLoader],
+          use: ['style-loader', cssLoader, postcssLoader, sassLoader],
         },
         {
           test: /\.ts$/i,
-          use: ["ts-loader", "@aurelia/webpack-loader"],
+          use: ['ts-loader', '@aurelia/webpack-loader'],
           exclude: /node_modules/,
         },
         {
           test: /\.html$/i,
-          use: "@aurelia/webpack-loader",
+          use: '@aurelia/webpack-loader',
           exclude: /node_modules/,
         },
         {
           test: /\.(png|gif|jpg|cur)$/i,
-          loader: "url-loader",
+          loader: 'url-loader',
           options: { limit: 8192 },
         },
         {
           test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
-          loader: "url-loader",
-          options: { limit: 10000, mimetype: "application/font-woff2" },
+          loader: 'url-loader',
+          options: { limit: 10000, mimetype: 'application/font-woff2' },
         },
         {
           test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
-          loader: "url-loader",
-          options: { limit: 10000, mimetype: "application/font-woff" },
+          loader: 'url-loader',
+          options: { limit: 10000, mimetype: 'application/font-woff' },
         },
         // load these fonts normally, as files:
         {
           test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
-          loader: "url-loader",
+          loader: 'url-loader',
         },
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: "index.ejs" }),
+      new HtmlWebpackPlugin({ template: 'index.ejs' }),
       analyze && new BundleAnalyzerPlugin(),
       test &&
         runTest &&
@@ -90,7 +91,7 @@ module.exports = function (env, { runTest, analyze }) {
           dev: false,
           swallowError: true,
           onBuildEnd: {
-            scripts: ["npm run test:headless"],
+            scripts: ['npm run test:headless'],
           },
         }),
     ].filter((p) => p),

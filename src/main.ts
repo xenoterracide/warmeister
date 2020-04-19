@@ -8,7 +8,7 @@ import { App } from './app';
 import en from './locales/en/translations.json';
 
 Aurelia.register(LoggerConfiguration.create(console, LogLevel.debug))
-  .register(RouterConfiguration)
+  .register(RouterConfiguration.customize({ useUrlFragmentHash: false }))
   .register(
     I18nConfiguration.customize((options) => {
       (options.translationAttributeAliases = ['i18n']),

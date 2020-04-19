@@ -57,7 +57,7 @@ export class GameRepository {
       } else {
         uri = undefined;
       }
-    } while (!!uri);
+    } while (uri);
 
     const blacklist: string[] = [
       'bsdata',
