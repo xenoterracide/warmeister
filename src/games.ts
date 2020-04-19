@@ -15,17 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ILogger } from "aurelia";
-import _ from "lodash";
-import { I18N } from "@aurelia/i18n";
-import { IRouteableComponent } from "@aurelia/router";
-import { Comparator, Enableable } from "./model/common";
-import { Game, GameRepository } from "./model/game";
+import { ILogger } from 'aurelia';
+import _ from 'lodash';
+import { I18N } from '@aurelia/i18n';
+import { IRouteableComponent } from '@aurelia/router';
+import { Comparator, Enableable } from './model/common';
+import { Game, GameRepository } from './model/game';
 
 interface GameButton extends Game, Enableable {}
 
 export class Games implements IRouteableComponent {
-  title = "Games";
+  title = 'Games';
   addIsActive = false;
   games: GameButton[] = [];
   myGames: Game[] = [];
@@ -36,15 +36,15 @@ export class Games implements IRouteableComponent {
   ) {}
 
   add(game: GameButton) {
-    this.log.debug("add", game.id);
+    this.log.debug('add', game.id);
     game.enabled = false;
     this.myGames.push(game);
     this.myGames.sort(Comparator.translatable(this.i18n));
-    this.log.debug("mygames", this.myGames);
+    this.log.debug('mygames', this.myGames);
   }
 
   remove(game: GameButton) {
-    this.log.debug("remove", game.id);
+    this.log.debug('remove', game.id);
     game.enabled = true;
     this.myGames.splice(
       this.myGames.findIndex((g) => _.isEqual(g, game)),

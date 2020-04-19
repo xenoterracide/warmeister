@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { I18N } from "@aurelia/i18n";
+import { I18N } from '@aurelia/i18n';
 
 export interface Identifiable {
   readonly id: string;
