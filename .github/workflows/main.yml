@@ -1,8 +1,24 @@
 name: main
 on: [push]
 jobs:
+  lint:
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+      - run: yarn install
+      - run: yarn lint
   unit:
-    needs: [e2e]
+    needs: [e2e, lint]
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +43,7 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit == 'true'
       - run: yarn test
   e2e:
-    needs: [build]
+    needs: [build, lint]
     strategy:
       matrix:
         browser: [chrome, electron, firefox]
