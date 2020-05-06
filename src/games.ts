@@ -35,11 +35,16 @@ export class Games implements IRouteableComponent {
     @I18N private readonly i18n: I18N
   ) {}
 
+  close(): void {
+    this.log.debug('closing');
+    this.addIsActive = false;
+    this.myGames.sort(Comparator.translatable(this.i18n));
+  }
+
   add(game: GameButton): void {
     this.log.debug('add', game.id);
     game.enabled = false;
     this.myGames.push(game);
-    this.myGames.sort(Comparator.translatable(this.i18n));
     this.log.debug('mygames', this.myGames);
   }
 

@@ -30,18 +30,31 @@
       <div class="content columns">
         <ul class="buttons level column">
           <li class="level-item" repeat.for="i of games.length">
-            <button id="${games[i].id}" class="button is-fullwidth is-light"
-              class.bind="games[i].enabled ? 'is-success' : ''" disabled.bind="! games[i].enabled"
-              click.delegate="add(games[i])" i18n="${games[i].i18n}"></button>
+            <button
+              id="${games[i].id}"
+              class="button is-fullwidth is-light"
+              class.bind="games[i].enabled ? 'is-success' : ''"
+              disabled.bind="! games[i].enabled"
+              click.delegate="add(games[i])"
+              i18n="${games[i].i18n}"
+            ></button>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <button click.delegate="addIsActive = false" class="modal-close is-large" aria-label="close"></button>
+  <button
+    click.delegate="close()"
+    class="modal-close is-large"
+    aria-label="close"
+  ></button>
 </div>
 <div class="is-fab">
-  <span click.delegate="addIsActive = true" class="icon is-large has-text-primary" aria-lable="Add Game">
+  <span
+    click.delegate="addIsActive = true"
+    class="icon is-large has-text-primary"
+    aria-lable="Add Game"
+  >
     <i class="fas fa-plus-circle fa-4x"></i>
   </span>
 </div>
